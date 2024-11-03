@@ -51,7 +51,7 @@
               # unstable with `srcs` properly defined.
               kicadSrc = {
                 src = ./kicad;
-                rev = "development";
+                rev = "develop";
               };
               kicadVersion = "dev";
 
@@ -102,7 +102,7 @@
               withI18n = true;
               with3d = true;
               debug = true;
-              sanitizeAddress = false;
+              sanitizeAddress = true;
               sanitizeThreads = false;
             in
             # inherit (lib)
@@ -208,7 +208,9 @@
                 # Common libraries, referenced during runtime, via the wrapper.
                 passthru.libraries = pkgs.callPackages ./libraries.nix { inherit libSrc; };
                 passthru.callPackage = pkgs.newScope { inherit addonPath python; };
+                system = pkgs.system;
                 base = pkgs.callPackage ./base.nix {
+                  inherit system;
                   inherit stable testing baseName;
                   inherit kicadSrc kicadVersion;
                   inherit wxGTK python wxPython;

@@ -1,6 +1,7 @@
 {
   lib,
   stdenv,
+  system,
   cmake,
   libGLU,
   libGL,
@@ -76,12 +77,12 @@ stdenv.mkDerivation rec {
 
   src = kicadSrc.src;
 
-  patches = [
-    # upstream issue 12941 (attempted to upstream, but appreciably unacceptable)
-    ./writable.patch
-    # https://gitlab.com/kicad/code/kicad/-/issues/15687
-    ./runtime_stock_data_path.patch
-  ];
+  # patches = [
+  #   # upstream issue 12941 (attempted to upstream, but appreciably unacceptable)
+  #   ./writable.patch
+  #   # https://gitlab.com/kicad/code/kicad/-/issues/15687
+  #   ./runtime_stock_data_path.patch
+  # ];
 
   # tagged releases don't have "unknown"
   # kicad testing and nightlies use git describe --dirty
